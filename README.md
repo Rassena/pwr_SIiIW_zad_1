@@ -1,4 +1,28 @@
 # SIiIW_zad_1
 Sztuczna inteligencja i inżynieria wiedzy Lista 1
 
-[SIiIW___zad_1.pdf](https://github.com/Rassena/SIiIW_zad_1/files/10913107/SIiIW___zad_1.pdf)
+Celem ćwiczenia jest praktyczne zapoznanie się z problemami optymalizacyj-
+nymi oraz praktyczne przećwiczenie omawianych na wykładzie metod rozwiązy-
+wania pewnej podklasy tych problemów. Po wykonaniu listy, student powinien
+wiedzieć czym jest problem optymalizacyjny, jakie trudności mogą się wiązać
+z uzyskaniem dokładnego rozwiązania przedstawionego problemu oraz jak po-
+radzić sobie z rozwiązaniem problemu przy ograniczonych zasobach (np. moce
+obliczeniowe, czas). W szczególności znane powinny być różnice między aprok-
+symacją a heurystyką oraz przykłady podejścia heurystycznego do problemu
+przeszukania, oraz znajdowania ścieżek.
+2 Wprowadzenie teoretyczne
+Poniżej znajdują się informacje pomocne w wykonaniu listy zadań. Zakłada się,
+że po wykonaniu student opanował zagadnienia teoretyczne.
+2.1 Definicje
+Definicja 1 (Problem Optymalizacyjny). Problemem optymalizacyjnym nazy-
+wamy zbiór ograniczeń (zadanych w postaci nierówności lub równości na zmien-
+nych decyzyjnych) wraz z funkcją celu.
+Niech S będzie zbiorem rozwiązań dopuszczalnych w założonym problemie, tzn.
+zbiór takich  ̄x, które spełniają wszystkie ograniczenia, a f( ̄x) : Kn → Kfunk-
+cją oceny jakości rozwiązania. Wtedy problemem minimalizacyjnym nazywamy
+znalezienie takiego s∗ ∈ S, dla którego s∗ = mins∈S f(s) a f(s) jest funkcją
+kosztu. Alternatywnie, problem nazywamy maksymalizacyjnym jeśli celem jest
+znalezienie takiego s∗ ∈ S, dla którego s∗ = maxs∈S f(s) a f(s) jest funkcją
+użyteczności.
+Łatwo zauważyć, że dowolny problem minimalizacyjny można zamienić na
+maksymalizacyjny.
