@@ -1,0 +1,13 @@
+{
+  "Unnamed": 0,
+  "company": "MPK Autobusy",
+  "line": "A",
+  "departure_time": "20:00:00",
+  "arrival_time": "20:01:00",
+  "start_stop": "KRZYKI",
+  "end_stop": "Sowia",
+  "start_stop_lat": "51.07488366",
+  "start_stop_lon": "17.00656861",
+  "end_stop_lat": "51.07379262",
+  "end_stop_lon": "17.00184494"
+}
