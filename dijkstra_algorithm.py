@@ -1,14 +1,16 @@
 """
 
 """
+from datetime import datetime
 
 import heapq
 
 
-def dijkstra(graph, start):
+def dijkstra(graph, start: str):
     distances = {node: float('inf') for node in graph}
     distances[start] = 0
     queue = [(0, start)]
+    date_format = '%H:%M:%S'
 
     while queue:
         current_distance, current_node = heapq.heappop(queue)
@@ -16,8 +18,15 @@ def dijkstra(graph, start):
         if current_distance > distances[current_node]:
             continue
 
-        for neighbor, weight in graph[current_node].items():
-            distance = current_distance + weight
+        for neighbor, weights in graph[current_node].items():
+            shortest = float('inf')
+            for _, weight in weights.items():
+                arrival = datetime.strptime(weight['arrival_time'], date_format)
+                departure = datetime.strptime(weight['departure_time'], date_format)
+                dif = (arrival-departure).total_seconds()/60
+                if shortest > dif:
+                    shortest = dif
+            distance = current_distance + shortest
 
             if distance < distances[neighbor]:
                 distances[neighbor] = distance
