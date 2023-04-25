@@ -1,11 +1,11 @@
-import geopy
-from element import PriorityQueue
+from geopy import distance
+from elements import PriorityQueue
 import datetime
 
 
 def heuristic(a, b, g):
     edge = g.edges[(a, b)][0]
-    return geopy.distance.distance((edge.start_x, edge.start_y), (edge.end_x, edge.end_y)).km * 3
+    return distance.distance((edge.start_x, edge.start_y), (edge.end_x, edge.end_y)).km * 3
 
 
 def astar_search(graph, start_stop, end_stop, start_time, opt_time=True):

@@ -1,5 +1,5 @@
 import datetime
-from element import PriorityQueue
+from elements import PriorityQueue
 
 
 def dijkstra_search(graph, start_stop, end_stop, start_time):

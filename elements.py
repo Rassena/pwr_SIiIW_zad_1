@@ -1,7 +1,7 @@
 import heapq
 from constants import PENALTY
-from utils import search, time_diff
-
+def time_diff(end_time, start_time):
+    return (end_time.hour * 60 + end_time.minute) - (start_time.hour * 60 + start_time.minute)
 
 class PriorityQueue:
     def __init__(self):
@@ -26,6 +26,24 @@ class Edge:
         self.start_y = start_y
         self.end_x = end_x
         self.end_y = end_y
+
+
+def search(arr, low, high, x):
+    if high >= low:
+        mid = (high + low) // 2
+        if arr[mid].leave_time == x:
+            return mid
+        elif arr[mid].leave_time > x:
+            return search(arr, low, mid - 1, x)
+        else:
+            return search(arr, mid + 1, high, x)
+    else:
+        if low >= len(arr):
+            return -1
+        if arr[low].leave_time > x:
+            return low
+        else:
+            return -1
 
 
 class Graph:
