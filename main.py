@@ -1,15 +1,17 @@
 """
 main.py is starting file and for debug
 """
-from dijkstra_algorithm import test_dijkstra, dijkstra
-from utils import import_data, create_graph, draw_graph
+from datetime import datetime
+from constants import CONNECTIONS
+from utils import load_data
 
 if __name__ == "__main__":
-    # imported_data = import_data()
-    # print(imported_data.head(2))
+    graph = load_data(CONNECTIONS)
 
-    # draw_graph(create_graph())
-    # test_dijkstra()
+    start_stop = "kwiska"
+    end_stop = "most grunwaldzki"
+    start_time = datetime.time(7, 52)
+    algorithm = "d"
+    option = "t"
 
-    graph = create_graph()
-    print(dijkstra(graph, "WAŁBRZYSKA"))
+    # dijkstra(graph, "kwiska", "most grunwaldzki", datetime.time(7, 52))
