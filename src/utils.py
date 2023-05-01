@@ -4,35 +4,45 @@ import_data function is importing data from files inside folder data
 """
 import os
 
-import pandas
 from astar_algorithm import astar_search
 from dijkstra_algorithm import dijkstra_search
 from elements import Graph, Edge
-
-import warnings
-
-from constants import DATA_FOLDER
-
-warnings.simplefilter(action='ignore', category=FutureWarning)
+from constants import DATA_FOLDER, CSV_DATA_TYPE
 
 
-def time_diff(end_time, start_time):
-    return (end_time.hour * 60 + end_time.minute) - (start_time.hour * 60 + start_time.minute)
+def time_diff(end_time: int, start_time: int) -> int:
+    """
+    :param end_time:
+    :param start_time:
+    :return:
+    """
+    return end_time - start_time
 
 
-def load_data(file):
-    df = None
-    try:
-        df = pandas.read_csv(
-            os.path.join(DATA_FOLDER, file),
-            parse_dates=['departure_time', 'arrival_time'],
-            date_parser=lambda x: pandas.to_datetime(x, format='%H:%M:%S').time,
-            low_memory=False
-        )
-    except FutureWarning:
-        pass
+def time_minutes_from_noon(hour: str) -> int:
+    """
+    :param hour: str in '%H:%M:%S' format
+    :return:
+    """
 
-    graph = Graph()
+    h, m, _ = hour.split(':')
+    return int((int(h) * 60) + int(m))
+
+
+def time_format_to_str(minutes: int) -> str:
+    return f"{minutes // 60}:{(minutes % 60):02d}"
+
+
+def load_data(file: str) -> Graph:
+    """
+    :param file:
+    :return:
+    """
+
+    import pandas
+    df = pandas.read_csv(os.path.join(DATA_FOLDER, file), dtype=CSV_DATA_TYPE)
+
+    graph: Graph = Graph()
     for row in df.values[1:]:
         start_stop = str(row[6]).lower()
         end_stop = str(row[7]).lower()
@@ -42,7 +52,15 @@ def load_data(file):
         else:
             graph.nodes[start_stop] = [end_stop]
 
-        edge = Edge(row[3], row[5], row[4], row[8], row[9], row[10], row[11])
+        edge = Edge(
+            name=row[3],
+            arrive_time=time_minutes_from_noon(row[5]),
+            leave_time=time_minutes_from_noon(row[4]),
+            start_x=row[8],
+            start_y=row[9],
+            end_x=row[10],
+            end_y=row[11]
+        )
 
         if (start_stop, end_stop) in graph.edges.keys():
             graph.edges[(start_stop, end_stop)].append(edge)
@@ -79,17 +97,18 @@ def create_path(came_from, start_stop, end_stop):
 
 def display_results(path, lines):
     cur_stop = lines[0][0]
-    print(f"Line: {str(cur_stop)} Stop: {str(path[0])} departure: {str(lines[0][1])} arrival: {str(lines[0][2])}")
+    print(
+        f"Line: {str(cur_stop)} Stop: {str(path[0])} departure: {time_format_to_str(lines[0][1])} arrival: {time_format_to_str(lines[0][2])}")
     i = 2
     changes = 0
     for elem in lines[2:]:
         if elem[0] != cur_stop:
             changes += 1
             cur_stop = elem[0]
-            print(f"Bus change! Line: {str(cur_stop)} Stop: {str(path[i])} departure: {str(elem[1])}")
+            print(f"Bus change! Line: {str(cur_stop)} Stop: {str(path[i])} departure: {time_format_to_str(elem[1])}")
         i += 1
     diff_in_time = time_diff(lines[-1][2], lines[0][1])
-    print(f"Arrival Time: {str(lines[-1][2])} Stop: {str(path[-1])}")
+    print(f"Arrival Time: {time_format_to_str(lines[-1][2])} Stop: {str(path[-1])}")
     print(f"Travel time: {str(diff_in_time)} min")
     print(f"Changes: {changes}")
     print("")

@@ -1,9 +1,15 @@
 import heapq
 from constants import PENALTY
+from typing import TypedDict
 
 
-def time_diff(end_time, start_time):
-    return (end_time.hour * 60 + end_time.minute) - (start_time.hour * 60 + start_time.minute)
+def time_diff(end_time: int, start_time: int) -> int:
+    """
+    :param end_time:
+    :param start_time:
+    :return:
+    """
+    return end_time - start_time
 
 
 class PriorityQueue:
@@ -13,7 +19,7 @@ class PriorityQueue:
     def empty(self) -> bool:
         return not self.elements
 
-    def put(self, item, priority):
+    def put(self, item, priority) -> None:
         heapq.heappush(self.elements, (priority, item))
 
     def get(self):
@@ -21,14 +27,25 @@ class PriorityQueue:
 
 
 class Edge:
-    def __init__(self, name, arrive_time, leave_time, start_x, start_y, end_x, end_y):
-        self.name = name
-        self.arrive_time = arrive_time
-        self.leave_time = leave_time
-        self.start_x = start_x
-        self.start_y = start_y
-        self.end_x = end_x
-        self.end_y = end_y
+    def __init__(self, name: str, arrive_time: int, leave_time: int, start_x: float, start_y: float, end_x: float,
+                 end_y: float):
+        """
+        :param name:
+        :param arrive_time:
+        :param leave_time:
+        :param start_x:
+        :param start_y:
+        :param end_x:
+        :param end_y:
+        """
+
+        self.name: str = name
+        self.arrive_time: int = arrive_time
+        self.leave_time: int = leave_time
+        self.start_x: float = start_x
+        self.start_y: float = start_y
+        self.end_x: float = end_x
+        self.end_y: float = end_y
 
 
 def search(arr, low, high, x):

@@ -2,20 +2,17 @@
 main.py is starting file and for debug
 """
 
-#FIXME: Change time to int from start of day
-
-
 from datetime import time
 from constants import CONNECTIONS
 from tests import calculate_efficiency
-from utils import load_data, generate_results, create_path, display_results
+from utils import load_data, generate_results, create_path, display_results, time_minutes_from_noon
 
 if __name__ == "__main__":
     graph = load_data(CONNECTIONS)
 
     start_stop = "leśnica"
     end_stop = "księże małe"
-    start_time = time(7, 30)
+    start_time = time_minutes_from_noon("7:30:00")
     algorithm = "d"
     option = "t"
 
