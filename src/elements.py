@@ -1,7 +1,10 @@
 import heapq
 from constants import PENALTY
+
+
 def time_diff(end_time, start_time):
     return (end_time.hour * 60 + end_time.minute) - (start_time.hour * 60 + start_time.minute)
+
 
 class PriorityQueue:
     def __init__(self):

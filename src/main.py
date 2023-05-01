@@ -5,10 +5,10 @@ main.py is starting file and for debug
 #FIXME: Change time to int from start of day
 
 
-
 from datetime import time
 from constants import CONNECTIONS
-from utils import load_data, generate_results, create_path, display_results, show_efficiency
+from tests import calculate_efficiency
+from utils import load_data, generate_results, create_path, display_results
 
 if __name__ == "__main__":
     graph = load_data(CONNECTIONS)
@@ -23,4 +23,4 @@ if __name__ == "__main__":
     display_results(*create_path(*generate_results(graph, start_stop, end_stop, start_time, algorithm="a", option="t")))
     display_results(*create_path(*generate_results(graph, start_stop, end_stop, start_time, algorithm="a", option="p")))
 
-    show_efficiency(graph, start_stop, end_stop, start_time)
+    calculate_efficiency(graph, start_stop, end_stop, start_time)

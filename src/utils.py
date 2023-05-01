@@ -5,10 +5,15 @@ import_data function is importing data from files inside folder data
 import os
 
 import pandas
-import time
 from astar_algorithm import astar_search
 from dijkstra_algorithm import dijkstra_search
 from elements import Graph, Edge
+
+import warnings
+
+from constants import DATA_FOLDER
+
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
 
 def time_diff(end_time, start_time):
@@ -16,12 +21,16 @@ def time_diff(end_time, start_time):
 
 
 def load_data(file):
-    df = pandas.read_csv(
-        os.path.join("data", file),
-        parse_dates=['departure_time', 'arrival_time'],
-        date_parser=lambda x: pandas.to_datetime(x, format='%H:%M:%S').time,
-        low_memory=False
-    )
+    df = None
+    try:
+        df = pandas.read_csv(
+            os.path.join(DATA_FOLDER, file),
+            parse_dates=['departure_time', 'arrival_time'],
+            date_parser=lambda x: pandas.to_datetime(x, format='%H:%M:%S').time,
+            low_memory=False
+        )
+    except FutureWarning:
+        pass
 
     graph = Graph()
     for row in df.values[1:]:
@@ -66,23 +75,6 @@ def create_path(came_from, start_stop, end_stop):
     lines.append(came_from[end_stop][1])
 
     return path, lines
-
-
-def show_efficiency(graph, start_stop, end_stop, start_time):
-    st_time = time.time()
-    _, _ = dijkstra_search(graph, start_stop, end_stop, start_time)
-    end_time = time.time()
-    print(f"dijkstra: {(end_time - st_time)*1000} ms")
-
-    st_time = time.time()
-    _, _ = astar_search(graph, start_stop, end_stop, start_time, opt_time=True)
-    end_time = time.time()
-    print(f"astar optimized for time: {(end_time - st_time)*1000} ms")
-
-    st_time = time.time()
-    _, _ = astar_search(graph, start_stop, end_stop, start_time, opt_time=False)
-    end_time = time.time()
-    print(f"astar optimized for changes: {(end_time - st_time)*1000} ms")
 
 
 def display_results(path, lines):

@@ -1,2 +1,5 @@
 CONNECTIONS = "connection_graph_new.csv"
+DATA_FOLDER = "data"
 PENALTY = 10000
+TEST_REPEATS = 10
+ROUND_NUMBER = 2
