@@ -1,4 +1,5 @@
 # SIiIW_zad_1
+
 ## Sztuczna inteligencja i inżynieria wiedzy Lista 1
 
 Celem ćwiczenia jest praktyczne zapoznanie się z problemami optymalizacyjnymi
@@ -17,7 +18,7 @@ problemu przeszukania, oraz znajdowania ścieżek.
 znajdują się informacje pomocne w wykonaniu listy zadań.  
 Zakłada się, że po wykonaniu student opanował zagadnienia teoretyczne.
 
-### 2.1 Definicje Definicja 1 (Problem Optymalizacyjny).
+### 2.1 Definicje Definicja 1 (Problem Optymalizacyjny)
 
 Problemem optymalizacyjnym nazywamy zbiór ograniczeń (zadanych w postaci nierówności lub
 równości na zmiennych decyzyjnych) wraz z funkcją celu.
